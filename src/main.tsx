@@ -7,7 +7,7 @@ import './index.css';
 
 // Polyfills
 window.global = window;
-window.process = { env: { NODE_ENV: import.meta.env.MODE } };
+(window as any).process = { env: { NODE_ENV: import.meta.env.MODE } };
 
 console.log('Alchemy Key available:', !!import.meta.env.VITE_ALCHEMY_KEY);
 

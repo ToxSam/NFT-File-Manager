@@ -249,7 +249,9 @@ const NFTViewer: React.FC = () => {
                         <h3 className="font-medium mb-1">{nft.name}</h3>
                         <div className="flex items-center gap-2">
                           <p className="text-sm text-white/60">{nft.collection}</p>
-                          <NetworkBadge network={nft.network} />
+                          {nft.network && (
+                            <NetworkBadge network={nft.network} />
+                          )}
                         </div>
                       </div>
                     </button>
@@ -363,7 +365,9 @@ const NFTViewer: React.FC = () => {
                       </div>
                       <div>
                         <span className="text-white/40 block mb-1">Network</span>
-                        <NetworkBadge network={selectedAsset.network} />
+                        {selectedAsset?.network && (
+                          <NetworkBadge network={selectedAsset.network} />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -371,8 +375,8 @@ const NFTViewer: React.FC = () => {
                   {/* Description with Show More/Less */}
                   <div className="bg-black/20 rounded-lg p-4 border border-white/5">
                     <div className={`relative ${!isDescriptionExpanded ? 'max-h-24 overflow-hidden' : ''}`}>
-                      <p className="text-white/60 whitespace-pre-wrap break-words">
-                        {selectedAsset.description}
+                      <p className="text-white/60 mb-6">
+                        {selectedAsset?.description || 'No description available'}
                       </p>
                       {!isDescriptionExpanded && (
                         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/20 to-transparent" />

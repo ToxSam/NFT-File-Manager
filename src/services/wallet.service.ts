@@ -561,6 +561,42 @@ export class WalletService {
       }
     }
   }
+
+  transformNFTData(nftData: any): NFTMetadata {
+    const modelUrls = this.find3DModelUrl(nftData);
+    
+    return {
+      id: nftData.id,
+      name: nftData.name || 'Untitled',
+      description: nftData.description,
+      format: modelUrls[0]?.format || 'unknown',
+      thumbnail: nftData.thumbnail,
+      collection: nftData.collection,
+      creator: nftData.creator,
+      contract: {
+        address: nftData.contract?.address
+      },
+      tokenId: nftData.tokenId,
+      network: this.selectedNetwork,
+      technical: {
+        triangles: nftData.technical?.triangles?.toString(),
+        vertices: nftData.technical?.vertices?.toString(),
+        materials: nftData.technical?.materials?.toString(),
+        textureSize: nftData.technical?.textureSize?.toString(),
+        fileSize: nftData.technical?.fileSize?.toString(),
+        animations: nftData.technical?.animations?.toString(),
+        storage: {
+          type: nftData.technical?.storage?.type || 'unknown',
+          hash: nftData.technical?.storage?.hash || '',
+          url: nftData.technical?.storage?.url,
+          gateway: nftData.technical?.storage?.gateway || ''
+        }
+      },
+      media: nftData.media,
+      raw_metadata: nftData.raw_metadata,
+      model_urls: modelUrls
+    } as NFTMetadata;
+  }
 }
 
 export const walletService = WalletService.getInstance(); 
