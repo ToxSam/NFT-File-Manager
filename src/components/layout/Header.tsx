@@ -6,7 +6,7 @@ import { AlchemyKeyButton } from '../api/AlchemyKeyButton';
 
 export const Header: React.FC = () => {
   const handleLogoClick = () => {
-    window.location.href = '/';
+    window.location.href = 'https://toxsam.github.io/NFT-File-Manager/';
   };
 
   return (
