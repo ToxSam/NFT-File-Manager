@@ -15,6 +15,15 @@ export function useNFTFetching(searchQuery: string, network?: NetworkInfo) {
       try {
         setLoading(true);
         setError(null);
+
+        // Check for Alchemy API key
+        const alchemyKey = localStorage.getItem('alchemyApiKey');
+        if (!alchemyKey) {
+          setError('Please set your Alchemy API key first');
+          setNfts([]);
+          return;
+        }
+
         if (!address) {
           setNfts([]);
           return;

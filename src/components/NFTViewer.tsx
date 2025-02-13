@@ -260,7 +260,12 @@ const NFTViewer: React.FC = () => {
               </div>
             ) : (
               <div className="p-4 text-white/60">
-                {searchAddress ? 'No NFTs found for this address.' : 'Enter an address above to view NFTs.'}
+                {searchAddress ? 'No NFTs found for this address.' : (
+                  <div className="space-y-2">
+                    <p>Enter an address above to view NFTs.</p>
+                    <p>Enter an Alchemy API key to use this app, check the key button 🗝️ at the top right.</p>
+                  </div>
+                )}
               </div>
             )}
           </div>

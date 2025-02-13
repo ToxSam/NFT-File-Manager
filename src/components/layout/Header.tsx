@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Image } from 'lucide-react';
+import { Box, Image, Github } from 'lucide-react';
 import { NetworkSelector } from '../network/NetworkSelector';
 import { AddressSearch } from '../address/AddressSearch';
 import { AlchemyKeyButton } from '../api/AlchemyKeyButton';
@@ -41,6 +41,15 @@ export const Header: React.FC = () => {
           <div className="flex items-center gap-3 ml-auto">
             <NetworkSelector />
             <AlchemyKeyButton />
+            <a
+              href="https://github.com/ToxSam/NFT-File-Manager"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/5 transition-colors"
+              title="View on GitHub"
+            >
+              <Github size={20} />
+            </a>
           </div>
         </div>
       </header>
