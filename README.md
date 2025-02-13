@@ -2,6 +2,8 @@
 
 A modern web application for viewing and interacting with 3D NFT assets across multiple blockchain networks. Built with React, Three.js, and Web3 technologies.
 
+🌐 **[Live Demo](https://toxsam.github.io/NFT-File-Manager/)** | [GitHub Repository](https://github.com/ToxSam/NFT-File-Manager)
+
 ## What's in a Name?
 
 The name "Cista" draws inspiration from ancient history - originally a cylindrical vessel used to safeguard precious items. In Roman times, a cista was a sacred container that evolved from a simple basket into an elegant repository for valuable possessions. Much like its historical namesake, our Cista serves as a digital vessel for your valuable 3D NFT assets, allowing you to access, view, and interact with them in a secure and elegant way.
