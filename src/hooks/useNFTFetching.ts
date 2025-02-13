@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useWallet } from '../components/wallet/WalletContext';
 import { walletService } from '../services/wallet.service';
 import type { NFTMetadata, NetworkInfo } from '../types/wallet';
+import { SUPPORTED_CHAINS } from '../utils/constants';
 
 export function useNFTFetching(searchQuery: string, network?: NetworkInfo) {
   const { address } = useWallet();
@@ -19,7 +20,7 @@ export function useNFTFetching(searchQuery: string, network?: NetworkInfo) {
           return;
         }
 
-        const fetchedNFTs = await walletService.getNFTs(address, network, searchQuery);
+        const fetchedNFTs = await walletService.getNFTs(address, network || SUPPORTED_CHAINS.ETHEREUM, searchQuery);
         setNfts(fetchedNFTs);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch NFTs');

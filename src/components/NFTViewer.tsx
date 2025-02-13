@@ -382,7 +382,7 @@ const NFTViewer: React.FC = () => {
                         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/20 to-transparent" />
                       )}
                     </div>
-                    {selectedAsset.description.length > 100 && (
+                    {selectedAsset?.description && selectedAsset.description.length > 100 && (
                       <button
                         onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
                         className="mt-2 text-sm text-purple-400 hover:text-purple-300 transition-colors"

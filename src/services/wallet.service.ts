@@ -28,11 +28,11 @@ export class WalletService {
 
     // Initialize Alchemy instances for each network
     Object.values(SUPPORTED_CHAINS).forEach(network => {
-      const config = {
+      // @ts-expect-error - Known issue with Alchemy SDK types
+      this.alchemyInstances.set(network.id, new Alchemy({
         apiKey,
-        network: network.alchemyNetwork as Network,
-      };
-      this.alchemyInstances.set(network.id, new Alchemy(config));
+        network: network.alchemyNetwork as Network
+      }));
     });
   }
 
@@ -45,11 +45,11 @@ export class WalletService {
     
     // Initialize new instances with the new API key
     Object.values(SUPPORTED_CHAINS).forEach(network => {
-      const config = {
+      // @ts-expect-error - Known issue with Alchemy SDK types
+      this.alchemyInstances.set(network.id, new Alchemy({
         apiKey: newApiKey,
-        network: network.alchemyNetwork as Network,
-      };
-      this.alchemyInstances.set(network.id, new Alchemy(config));
+        network: network.alchemyNetwork as Network
+      }));
     });
 
     // Clear memory cache when API key changes
@@ -223,6 +223,7 @@ export class WalletService {
         id: nft.tokenId || '',
         name: nft.title || 'Untitled',
         description: nft.description || '',
+        type: 'NFT',
         format: format,
         thumbnail: nft.media?.[0]?.thumbnail || '',
         collection: nft.contract?.name || 'Unknown Collection',
@@ -231,23 +232,23 @@ export class WalletService {
           address: nft.contract?.address || ''
         },
         tokenId: nft.tokenId || '',
-        network, // Include network information
+        network,
         technical: {
-          triangles: 0,
-          vertices: 0,
-          materials: 0,
-          textureSize: 0,
-          fileSize: 0,
-          animations: 0,
+          triangles: '0',
+          vertices: '0',
+          materials: '0',
+          textureSize: '0',
+          fileSize: '0',
+          animations: '0',
           storage: {
             type: 'IPFS',
             hash: nft.tokenUri?.raw || '',
-            url: modelUrls.length > 0 ? modelUrls[0].url : ''
+            url: modelUrls.length > 0 ? modelUrls[0].url : '',
+            gateway: nft.tokenUri?.gateway || ''
           }
         },
         media: nft.media,
         raw_metadata: nft.metadata,
-        animation_url: nft.metadata?.animation_url,
         model_urls: modelUrls
       } as NFTMetadata;
     });
@@ -577,7 +578,7 @@ export class WalletService {
         address: nftData.contract?.address
       },
       tokenId: nftData.tokenId,
-      network: this.selectedNetwork,
+      network: nftData.network,
       technical: {
         triangles: nftData.technical?.triangles?.toString(),
         vertices: nftData.technical?.vertices?.toString(),
@@ -594,7 +595,8 @@ export class WalletService {
       },
       media: nftData.media,
       raw_metadata: nftData.raw_metadata,
-      model_urls: modelUrls
+      model_urls: modelUrls,
+      type: nftData.type || 'NFT'  // Add required type field
     } as NFTMetadata;
   }
 }
