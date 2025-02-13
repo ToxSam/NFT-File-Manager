@@ -10,7 +10,7 @@ import { getModelUrl, getFileExtension } from '../../utils/modelUtils';
 
 export interface ThreeDViewerProps {
   modelUrl: string;
-  onModelLoaded?: () => void;
+  onModelLoaded?: (stats?: any) => void;
   onError?: (error: unknown) => void;
 }
 

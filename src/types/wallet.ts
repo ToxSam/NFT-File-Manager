@@ -29,6 +29,7 @@ export interface NFTMetadata {
   thumbnail?: string;
   collection?: string;
   creator?: string;
+  network?: NetworkInfo;
   technical: {
     triangles?: string;
     vertices?: string;

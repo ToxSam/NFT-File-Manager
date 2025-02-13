@@ -19,6 +19,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const { nfts, loading, error } = useNFTFetching(searchQuery);
 
+  if (loading) {
+    return <div className="p-4 text-white/60">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="p-4 text-red-500">{error}</div>;
+  }
+
+  if (nfts.length === 0) {
+    return <div className="p-4 text-white/60">No NFTs found</div>;
+  }
+
   return (
     <div className="w-80 border-r border-white/5 bg-black/40 backdrop-blur-sm flex flex-col">
       {/* Search */}
@@ -37,24 +49,31 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Asset List */}
       <div className="flex-1 overflow-y-auto">
-        {loading ? (
-          <div className="p-4 text-white/60">Loading assets...</div>
-        ) : error ? (
-          <div className="p-4 text-red-400">{error.toString()}</div>
-        ) : nfts.length === 0 ? (
-          <div className="p-4 text-white/60">
-            {searchQuery ? 'No matching assets found' : 'No assets found'}
-          </div>
-        ) : (
-          nfts.map((asset) => (
-            <AssetCard
-              key={`${asset.id}-${asset.creator}-${Math.random()}`}
-              asset={asset}
-              onClick={() => onSelectAsset(asset)}
-              isSelected={selectedAsset?.id === asset.id}
-            />
-          ))
-        )}
+        {nfts.map((asset) => (
+          <button
+            key={`${asset.contract?.address || asset.id || Math.random()}-${asset.tokenId || Math.random()}`}
+            onClick={() => onSelectAsset(asset)}
+            className={`w-full p-4 flex items-start gap-3 transition-all ${
+              selectedAsset?.id === asset.id
+                ? 'bg-purple-500/20 border-l-4 border-l-purple-500 text-white'
+                : 'text-white/60 hover:text-white hover:bg-white/5 border-b border-white/5'
+            }`}
+          >
+            {asset.thumbnail && (
+              <img
+                src={asset.thumbnail}
+                alt={asset.name}
+                className={`w-16 h-16 rounded bg-black/50 object-cover ${
+                  selectedAsset?.id === asset.id ? 'ring-2 ring-purple-500' : ''
+                }`}
+              />
+            )}
+            <div className="flex-1 text-left">
+              <h3 className="font-medium mb-1">{asset.name}</h3>
+              <p className="text-sm text-white/40 truncate">{asset.description}</p>
+            </div>
+          </button>
+        ))}
       </div>
     </div>
   );
