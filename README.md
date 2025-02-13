@@ -2,9 +2,40 @@
 
 A modern web application for viewing and interacting with 3D NFT assets across multiple blockchain networks. Built with React, Three.js, and Web3 technologies.
 
-This app was made to help people easily access and view their 3D files from their Web3 wallets. No backend, no storage - just you and your NFTs.
+## What's in a Name?
 
-🌐 [Live Demo](https://toxsam.github.io/NFT-File-Manager/)
+The name "Cista" draws inspiration from ancient history - originally a cylindrical vessel used to safeguard precious items. In Roman times, a cista was a sacred container that evolved from a simple basket into an elegant repository for valuable possessions. Much like its historical namesake, our Cista serves as a digital vessel for your valuable 3D NFT assets, allowing you to access, view, and interact with them in a secure and elegant way.
+
+## Why Cista?
+
+This app was created to empower NFT collectors and creators to easily access and interact with their 3D files directly from their wallets. No more struggling with complex file formats or technical barriers - Cista makes it simple to view and manage your digital assets.
+
+## Quick Start Tutorial
+
+### 1. First Time Setup
+1. Visit the app website
+2. Connect your Web3 wallet (MetaMask recommended) using the connect button in the top right
+3. You'll need an Alchemy API key (free tier works great):
+   - Click the key icon in the top right
+   - Get a free API key from [Alchemy](https://www.alchemy.com/)
+   - Paste your key in the modal
+   - Your key is stored locally and never shared
+
+### 2. Viewing Your NFTs
+1. Once connected, your NFTs will automatically load
+2. Use the network selector to switch between different blockchains
+3. Click on any NFT card to view its 3D model
+4. In the viewer, you can:
+   - Rotate the model by dragging
+   - Zoom with the scroll wheel
+   - Pan by right-clicking and dragging
+   - Reset the view with the home button
+
+### 3. Tips & Tricks
+- Switch networks to view NFTs across different blockchains
+- The cache system remembers your recently viewed models
+- Supported formats: GLB, GLTF, and VRM
+- Use full screen mode for the best viewing experience
 
 ## Features
 
@@ -16,44 +47,7 @@ This app was made to help people easily access and view their 3D files from thei
 - 💨 Fast and efficient caching system
 - 🖼️ Support for various NFT asset formats
 
-## Tutorial: How to Use the App
-
-### Step 1: Initial Setup
-1. Visit the app in your browser
-2. Make sure you have MetaMask or another Web3 wallet installed
-3. Click the "Connect Wallet" button in the top right
-4. Sign in with your wallet when prompted
-
-### Step 2: Set Up Your Alchemy API Key
-1. Click the key icon in the top navigation
-2. Visit [Alchemy](https://www.alchemy.com/) to get your free API key if you don't have one
-3. Create an account and get your API key
-4. Paste your API key in the app's key modal
-5. Click "Save Key"
-
-### Step 3: Viewing Your NFTs
-1. Your NFTs will automatically load after connecting
-2. Use the network selector to switch between different blockchains
-3. Click on any NFT card to view its 3D model
-4. In the viewer, you can:
-   - Rotate the model by dragging
-   - Zoom in/out using the scroll wheel
-   - Pan by right-clicking and dragging
-   - Reset the view using the reset button
-
-### Step 4: Managing Assets
-1. Use the sidebar to filter different types of NFTs
-2. The viewer automatically detects and loads 3D files
-3. For VRM files, you get additional avatar controls
-4. Use the refresh button to update your NFT list
-
-### Troubleshooting
-- If NFTs don't load, verify your Alchemy API key
-- Make sure you're connected to the correct network in your wallet
-- Check that you're viewing the correct wallet address
-- Try refreshing the page if the 3D viewer isn't responding
-
-## Getting Started (Development)
+## Getting Started
 
 ### Prerequisites
 
@@ -89,14 +83,6 @@ To create a production build:
 npm run build
 ```
 
-## Usage
-
-1. Connect your Web3 wallet
-2. Enter your Alchemy API key
-3. Browse and interact with your 3D NFT assets
-4. Switch between different blockchain networks
-5. View and interact with 3D models in real-time
-
 ## Technology Stack
 
 - React 18+
@@ -115,7 +101,7 @@ npm run build
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. Feel free to fork it or improve it as you wish - this project is meant to grow with the community.
 
 ## License
 
@@ -128,5 +114,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - React Three Fiber for 3D React components
 
 ---
-
-Made with ❤️ by ToxSam. Feel free to fork it or improve it as you wish! 
+Made with ❤️ by ToxSam 
