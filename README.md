@@ -14,17 +14,35 @@ This app was created to empower NFT collectors and creators to easily access and
 
 ## Quick Start Tutorial
 
-### 1. First Time Setup
-1. Visit the app website
-2. Connect your Web3 wallet (MetaMask recommended) using the connect button in the top right
-3. You'll need an Alchemy API key (free tier works great):
-   - Click the key icon in the top right
-   - Get a free API key from [Alchemy](https://www.alchemy.com/)
-   - Paste your key in the modal
-   - Your key is stored locally and never shared
+### Option 1: Use the Hosted Version (Recommended)
+1. Visit [https://toxsam.github.io/NFT-File-Manager/](https://toxsam.github.io/NFT-File-Manager/)
+2. Click the key button 🗝️ in the top right
+3. Get a free API key from [Alchemy](https://www.alchemy.com/)
+4. Paste your key in the modal (your key is stored locally and never shared)
+5. Enter any Ethereum wallet address (0x...) in the search bar
+6. Start exploring 3D NFTs!
 
-### 2. Viewing Your NFTs
-1. Once connected, your NFTs will automatically load
+### Option 2: Run Locally
+1. Clone the repository:
+```bash
+git clone https://github.com/ToxSam/NFT-File-Manager.git
+cd NFT-File-Manager
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Follow steps 2-5 from Option 1 to set up your API key and start using the app
+
+### Using the App
+1. Once you've entered an API key and wallet address, NFTs will automatically load
 2. Use the network selector to switch between different blockchains
 3. Click on any NFT card to view its 3D model
 4. In the viewer, you can:
@@ -33,7 +51,7 @@ This app was created to empower NFT collectors and creators to easily access and
    - Pan by right-clicking and dragging
    - Reset the view with the home button
 
-### 3. Tips & Tricks
+### Tips & Tricks
 - Switch networks to view NFTs across different blockchains
 - The cache system remembers your recently viewed models
 - Supported formats: GLB, GLTF, and VRM
