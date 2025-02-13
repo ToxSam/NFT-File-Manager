@@ -1,21 +1,26 @@
 import React from 'react';
 import { ThreeDViewer } from './ThreeDViewer';
-import { VRMViewer } from './VRMViewer';
+import type { NFTMetadata } from '../../types/wallet';
 
-interface ViewerContainerProps {
-  modelUrl: string;
-  onModelLoaded?: (stats: any) => void;
+export interface ViewerContainerProps {
+  asset: NFTMetadata;
+  onLoad?: () => void;
+  onError?: (error: unknown) => void;
 }
 
-export const ViewerContainer: React.FC<ViewerContainerProps> = ({ modelUrl, onModelLoaded }) => {
-  const fileType = modelUrl.split('.').pop()?.toLowerCase();
-  console.log('File type:', fileType);
-
-  if (fileType === 'vrm') {
-    console.log('Routing to VRMViewer');
-    return <VRMViewer modelUrl={modelUrl} onModelLoaded={onModelLoaded} />;
-  }
-
-  console.log('Routing to ThreeDViewer');
-  return <ThreeDViewer modelUrl={modelUrl} onModelLoaded={onModelLoaded} />;
+export const ViewerContainer: React.FC<ViewerContainerProps> = ({ 
+  asset,
+  onLoad,
+  onError
+}) => {
+  // Add viewer selection logic based on asset type
+  return (
+    <div className="w-full aspect-video bg-black/20 rounded-lg overflow-hidden">
+      <ThreeDViewer
+        modelUrl={asset.technical.storage.url || asset.technical.storage.gateway}
+        onModelLoaded={onLoad}
+        onError={onError}
+      />
+    </div>
+  );
 }; 

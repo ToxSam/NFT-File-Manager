@@ -1,66 +1,70 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-import { ethers } from 'ethers';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import type { Eip1193Provider } from '../../types/wallet';
 
 interface WalletContextType {
   address: string | null;
   isConnected: boolean;
-  chainId: number | null;
   connect: () => Promise<void>;
   disconnect: () => void;
-  error: string | null;
 }
 
-const WalletContext = createContext<WalletContextType | undefined>(undefined);
+export const WalletContext = createContext<WalletContextType>({
+  address: null,
+  isConnected: false,
+  connect: async () => {},
+  disconnect: () => {},
+});
+
+export const useWallet = () => useContext(WalletContext);
 
 export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [address, setAddress] = useState<string | null>(null);
-  const [chainId, setChainId] = useState<number | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
 
-  const connect = useCallback(async () => {
-    try {
-      if (!window.ethereum) {
-        throw new Error('MetaMask not installed');
+  const connect = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const provider = window.ethereum as Eip1193Provider;
+        const accounts = await provider.request({ method: 'eth_requestAccounts' });
+        if (accounts && accounts[0]) {
+          setAddress(accounts[0]);
+          setIsConnected(true);
+        }
+      } catch (error) {
+        console.error('Error connecting wallet:', error);
       }
-
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const accounts = await provider.send('eth_requestAccounts', []);
-      const network = await provider.getNetwork();
-      
-      setAddress(accounts[0]);
-      setChainId(Number(network.chainId));
-      setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to connect wallet');
+    } else {
+      console.error('Please install MetaMask!');
     }
-  }, []);
+  };
 
-  const disconnect = useCallback(() => {
+  const disconnect = () => {
     setAddress(null);
-    setChainId(null);
-    setError(null);
+    setIsConnected(false);
+  };
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        const provider = window.ethereum as Eip1193Provider;
+        try {
+          const accounts = await provider.request({ method: 'eth_accounts' });
+          if (accounts && accounts[0]) {
+            setAddress(accounts[0]);
+            setIsConnected(true);
+          }
+        } catch (error) {
+          console.error('Error checking wallet connection:', error);
+        }
+      }
+    };
+
+    checkConnection();
   }, []);
 
   return (
-    <WalletContext.Provider 
-      value={{
-        address,
-        isConnected: !!address,
-        chainId,
-        connect,
-        disconnect,
-        error
-      }}
-    >
+    <WalletContext.Provider value={{ address, isConnected, connect, disconnect }}>
       {children}
     </WalletContext.Provider>
   );
-};
-
-export const useWallet = () => {
-  const context = useContext(WalletContext);
-  if (context === undefined) {
-    throw new Error('useWallet must be used within a WalletProvider');
-  }
-  return context;
 }; 

@@ -8,9 +8,10 @@ import * as THREE from 'three';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { getModelUrl, getFileExtension } from '../../utils/modelUtils';
 
-interface ThreeDViewerProps {
+export interface ThreeDViewerProps {
   modelUrl: string;
-  onModelLoaded?: (stats: any) => void;
+  onModelLoaded?: () => void;
+  onError?: (error: unknown) => void;
 }
 
 function LoadingMessage() {
@@ -219,7 +220,11 @@ function Model({ url, onLoaded }: { url: string; onLoaded?: (stats: any) => void
   return null;
 }
 
-export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({ modelUrl, onModelLoaded }) => {
+export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({ 
+  modelUrl, 
+  onModelLoaded,
+  onError 
+}) => {
   const [cameraDistance, setCameraDistance] = useState(4);
 
   if (!modelUrl) {

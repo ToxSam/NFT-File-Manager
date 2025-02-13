@@ -14,27 +14,33 @@ export interface WalletState {
   error: string | null;
 }
 
+export interface Eip1193Provider {
+  request: (args: { method: string; params?: any[] }) => Promise<any>;
+  on?: (eventName: string, handler: (...args: any[]) => void) => void;
+  removeListener?: (eventName: string, handler: (...args: any[]) => void) => void;
+}
+
 export interface NFTMetadata {
   id: string;
   name: string;
-  description: string;
-  collection: string;
-  creator: string;
+  description?: string;
+  type: string;
   format: string;
-  thumbnail: string;
-  animation_url?: string;
-  network: NetworkInfo;
+  thumbnail?: string;
+  collection?: string;
+  creator?: string;
   technical: {
-    triangles?: number;
-    vertices?: number;
-    materials?: number;
-    textureSize?: number;
-    fileSize?: number;
-    animations?: number;
-    storage?: {
+    triangles?: string;
+    vertices?: string;
+    materials?: string;
+    textureSize?: string;
+    animations?: string;
+    fileSize?: string;
+    storage: {
       type: string;
       hash: string;
       url?: string;
+      gateway: string;
     };
   };
   media?: Array<{ uri: string; type: string }>;
